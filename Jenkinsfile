@@ -2,6 +2,13 @@ pipeline {
   agent any
 
   stages {
+    stage('Check Java') {
+  steps {
+    bat 'echo JAVA_HOME=%JAVA_HOME%'
+    bat 'where javac'
+    bat 'javac -version'
+  }
+}
     stage('Build') {
       steps {
         echo 'Building...'
@@ -18,3 +25,4 @@ pipeline {
     }
   }
 }
+
