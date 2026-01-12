@@ -1,20 +1,20 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {      
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                // Compile the Java code
-                sh 'javac -d target ToUpper.java'
-            }
-        }       
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                // Run the Java program with an example argument
-                sh 'java -cp target ToUpper "example text"'
-            }
-        }
+  stages {
+    stage('Build') {
+      steps {
+        echo 'Building...'
+        bat 'if not exist target mkdir target'
+        bat 'javac -d target ToUpper.java'
+      }
     }
+
+    stage('Deploy') {
+      steps {
+        echo 'Deploying...'
+        bat 'java -cp target ToUpper "example text"'
+      }
+    }
+  }
 }
